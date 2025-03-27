@@ -1,10 +1,10 @@
 #######################################################################################################################################################
 # 
-# Name:
-# SID:
-# Exam Date:
-# Module:
-# Github link for this assignment:  
+# Name: Hamza Bin Adeel
+# SID: 740099526
+# Exam Date: 27/03/2025
+# Module: BEMM458
+# Github link for this assignment:https://github.com/UniversityExeterBusinessSchool/practiceassessment-thursday-hamza12345-ai  
 #
 # ######################################################################################################################################################
 # Instruction 1. Read the questions and instructions carefully and complete scripts.
@@ -32,7 +32,6 @@
 customer_feedback = """Your recent order experience has been satisfactory overall. While there were some minor issues,
 we appreciate the effort made to resolve them promptly."
 """
-
 # List of words to search for
 key_comments = {
     0: 'satisfactory',
@@ -47,11 +46,25 @@ key_comments = {
     9: 'minor'
 }
 
-# Write your search code here and provide comments. 
-
+# Write your search code here and provide comments.
+ 
+# MY SID is 740099526, so the first digit is 7 and the last digit is 6.
+allocated_keys=[7,6]
 # Initialize an empty list to store (start, end) positions
 my_list = []
-
+# Initiating a for loop that finds the position of my allocated words according to my allocated keys.
+for i in allocated_keys:
+    # My allocated word according to my allocated key
+    word=key_comments[i]
+    # Using the find command to find the start position of my allocated word in the string.
+    start=customer_feedback.find(word)
+    end=start+len(word)
+    # Appending the empty tuple to fill the start and end position of my allocated words
+    my_list.append((start,end))
+    # Using the print statement to print the positions of my allocated words 
+print(f'The position of my allocated words are {my_list}') 
+#Output will be as follows:
+# The position of my allocated words are [(129, 136), (18, 28)
 ##########################################################################################################################################################
 
 # Question 2 - Functions
@@ -59,18 +72,36 @@ my_list = []
 # Operating Profit Margin, Revenue per Customer, Customer Churn Rate, and Average Order Value. Use Python functions 
 # that will take the values and return the metric needed. Use the first two and last two digits of your ID number as the input values.
 
-# Insert first two digits of ID number here:
-# Insert last two digits of ID number here:
-
+# Insert first two digits of ID number here: 74
+# Insert last two digits of ID number here: 26
+# As I don't know the formulas for the following metrics, I used AI for the formulas that are mentioned below: 
 # Write your code for Operating Profit Margin
-
+# Using the define function to create a formula
+def operating_profit_margin(operating_income,revenue):
+    return (operating_income/revenue)*100
 # Write your code for Revenue per Customer
-
+# Using the define function to create a formula
+def revenue_per_customer(total_revenue,number_of_customers):
+    return (total_revenue/number_of_customers)
 # Write your code for Customer Churn Rate
-
+# Using the define function to create a formula
+def customer_churn_rate(lost_customers,total_customers):
+    return (lost_customers/total_customers)*100
 # Write your code for Average Order Value
-
+# Using the define function to create a formula
+def average_order_value (total_revenue,number_of_orders):
+    return (total_revenue/number_of_orders)
 # Call your designed functions here
+# Using the print statement to call the functions here using the first two and last two digits of my SID (74,26) as inputs:
+print('The Operating Profit Margin is', operating_profit_margin(74,26))
+print('The Revenue Per Customer is', revenue_per_customer(74,26))
+print('The Customer Churn Rate is', customer_churn_rate(74,26))
+print('The Average Order Value is', average_order_value(74,26))
+# The output is as follows:
+# The Operating Profit Margin is 284.61538461538464
+# The Revenue Per Customer is 2.8461538461538463
+# The Customer Churn Rate is 284.61538461538464
+# The Average Order Value is 2.8461538461538463
 
 ##########################################################################################################################################################
 
@@ -97,6 +128,51 @@ Price (£)    Demand (Units)
 """
 
 # Write your code here
+# Importing the required libraries for the code
+import numpy as np 
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt 
+
+# Defining the price and demand
+price = np.array([20,25,30,35,40,45,50,55,60,65,70]).reshape(-1,1)
+demand = np.array([300,280,260,240,210,190,160,140,120,100,85])
+# Creating a Linear Regression Model and then fitting the model
+model = LinearRegression()
+model.fit(price,demand)
+# Calculating the slope and intercept of the regression because it is required to caluclate the optimal price to maximize revenue
+slope = model.coef_[0]
+intercept = model.intercept_
+# Calculating the average demand
+average_demand = np.mean(demand)  
+#Calculating the optimal price to maximize revenue using the formula given to me by AI ( Average demand - Intercept)/ Slope
+optimal_price = (average_demand-intercept)/slope
+print(f"The optimal price at which the revenue is maximized is {optimal_price}.")
+# Predicting the demand at £52
+predicted_demand = model.predict(np.array([[52]]))
+print(f"The predicted demand at £52 is {predicted_demand[0]}.")
+# Now we are going to plot the regression line and the predicted demand
+# Creating a scatter plot for price vs demand
+plt.scatter(price,demand,color='blue',label='Data Points')
+#Plotting the regression line
+plt.plot(price,model.predict(price),color='red',label='Regression Line')
+# Showing the demand on the final output
+plt.scatter(52,predicted_demand,color='green',label='Predicted demand')
+# Setting the xlabel
+plt.xlabel("Price")
+# Setting the ylabel
+plt.ylabel("Demand")
+# Setting the title
+plt.title("Linear Regression of Price and Demand")
+# Showing the legend
+plt.legend()
+# Displaying the plot
+plt.show()
+
+# Output is as follows:
+# The optimal price at which the revenue is maximized is 45.0.
+#The predicted demand at £52 is 158.17272727272726.
+# The graph is shown in the word file.
+
 
 ##########################################################################################################################################################
 
@@ -106,17 +182,26 @@ import random
 import matplotlib.pyplot as plt
 
 # Generate 100 random numbers between 1 and student id number
-max-value = integer(input("Enter your Student ID: "))
-random_numbers = [random.randint(1, max_value) for i in range(0,100)]
 
+# Correcting the variable name and type of conversion
+max_value = int(input("Enter your Student ID: "))
+
+random_numbers = [random.randint(1, max_value) for i in range(0,100)]
 # Plotting the numbers in a line chart
-plt.plot(random_numbers, marker='O', markercolor='green', markeredgcolor='red', linestyle='--', lable='Random Numbers', color='blue');
-plt.title(Line Chart of 100 Random Numbers)
-plt.xlabel="Index"
-plt.ylabel="Random Number"
-plt.legend('---')
+
+# Correcting the marker format, attribute name, marker edge color and label spelling and correcting the syntac (removing the ; at the end of the code)
+plt.plot(random_numbers, marker='o', markerfacecolor='green', markeredgecolor='red', linestyle='--', label='Random Numbers', color='blue')
+# Adding quotes in the title
+plt.title("Line Chart of 100 Random Numbers")
+# Fixing the xlabel and ylabel assignment
+plt.xlabel("Index")
+plt.ylabel("Random Number")
+# Correcting the legend below 
+plt.legend()
 plt.grid(True)
 plt.show()
 
+# All my corrections/debugging is mentioned as comments in the above code.
+# Output is attached in word file
 
 
